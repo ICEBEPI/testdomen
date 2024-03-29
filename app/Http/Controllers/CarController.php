@@ -18,6 +18,7 @@ class CarController extends Controller
     public function index()
     {
         $cars = Car::with('engine')->get();
+
         return view('cars.index', compact(['cars']));
     }
 
