@@ -9,10 +9,12 @@
                     </a>
                     <div class="p-8 bg-slate-400 text-2xl">
                         <ul>
+                            adasdS
                             <li>Модель: {{ $car->brand }}</li>
                             <li>Год выпуска: {{ $car->year }}</li>
                             <li>Количество сидений: {{ $car->seats }}</li>
-                            <li><a class="text-2xl font-semibold mb-6 text-red-800 underline" href="{{ route('cars.destroy', $car) }}">Удалить авто из базы</a></li>
+                            <li><a class="text-2xl font-semibold mb-6 text-red-800 underline"
+                                    href="{{ route('cars.destroy', $car) }}">Удалить авто из базы</a></li>
                         </ul>
                         <h3 class="mt-6 mb-3 text-3xl font-semibold">Параметры двигателя: </h3>
                         <ul>
