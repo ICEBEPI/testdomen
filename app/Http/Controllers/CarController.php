@@ -17,7 +17,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::with('engine')->get();
+        $cars = Car::with('engine')->orderByDesc('id')->get();
 
         return view('cars.index', compact(['cars']));
     }
@@ -36,7 +36,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('cars.create');
+        $engines = Engine::where('car_id', null)->get();
+        return view('cars.create', compact(['engines']));
     }
 
     /**
@@ -47,7 +48,17 @@ class CarController extends Controller
      */
     public function store(StoreCarRequest $request)
     {
-        //
+        $data = $request->validated();
+        $engine = Engine::find($data['engine']);
+        $car = Car::create([
+            'number' => $data['number'],
+            'brand' => $data['brand'],
+            'seats' => $data['seats'],
+            'year' => $data['year'],
+        ]);
+        $engine->car_id = $car->id;
+        $engine->save();
+        return redirect()->route('cars.index');
     }
 
     /**
