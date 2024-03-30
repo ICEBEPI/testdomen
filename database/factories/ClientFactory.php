@@ -16,8 +16,19 @@ class ClientFactory extends Factory
      */
     public function definition()
     {
+        $cities = [
+            'Алматы',
+            'Астана',
+            'Шымкент',
+            'Тараз',
+            'Караганда',
+            'Кокшетау',
+        ];
         return [
-            //
+            'name' => fake()->name(),
+            'birthday' => fake()->date('Y-m-d', '2005-01-01'),
+            'city' => $cities[array_rand($cities)],
+            'phone' => fake()->phoneNumber(),
         ];
     }
 }

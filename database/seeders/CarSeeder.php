@@ -15,10 +15,6 @@ class CarSeeder extends Seeder
      */
     public function run()
     {
-        foreach(range(1, 10) as $i){
-            Car::factory()->create([
-                'engine_id' => $i,
-            ]);
-        }
+        Car::factory()->count(10)->create();
     }
 }
