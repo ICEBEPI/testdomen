@@ -9,7 +9,6 @@
                     </a>
                     <div class="p-8 bg-slate-400 text-2xl">
                         <ul>
-                            adasdS
                             <li>Модель: {{ $car->brand }}</li>
                             <li>Год выпуска: {{ $car->year }}</li>
                             <li>Количество сидений: {{ $car->seats }}</li>
