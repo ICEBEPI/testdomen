@@ -28,7 +28,8 @@ class StoreCarRequest extends FormRequest
             'brand' => ['required', 'string'],
             'seats' => 'required|integer|min:1|max:40',
             'year' => 'required|integer|min:1980|max:2025',
-            'engine' => 'required|exists:engines,id'
+            'engine' => 'required|exists:engines,id',
+            'owner' => 'required|integer',
         ];
     }
 }

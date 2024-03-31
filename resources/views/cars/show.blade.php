@@ -1,6 +1,11 @@
 @extends('master')
 @section('content')
     <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">{{ $title ?? 'Данные автомобиля' }}</h1>
+    
+    <div class="bg-gray-100 rounded-lg shadow-lg p-4 mb-6">
+        <h1 class="text-xl font-semibold mb-2">Владелец:</h1>
+        <h2 class="text-2xl font-bold text-red-600 underline">{{ $car->client?->name ?? 'Нет владельца' }}</h2>
+    </div>
 
     <div class="bg-gray-100 rounded-lg shadow-lg p-4 mb-6">
         <h1 class="text-xl font-semibold mb-2">Номер авто:</h1>

@@ -17,7 +17,7 @@ return new class extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Client::class)->nullable();
+            $table->foreignIdFor(Client::class)->default(0);
             $table->string('number');
             $table->string('brand');
             $table->integer('year');
