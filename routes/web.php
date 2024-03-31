@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Car;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EngineController;
 use App\Http\Controllers\MyController;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,5 @@ Route::get('cars/create', [CarController::class, 'create'])->name('cars.create')
 Route::post('cars/store', [CarController::class, 'store'])->name('cars.store');
 Route::get('cars/{car}', [CarController::class, 'show'])->name('cars.show');
 Route::get('cars/{car}/destroy', [CarController::class, 'destroy'])->name('cars.destroy');
+Route::get('clients/create', [ClientController::class, 'create'])->name('clients.create');
+Route::post('clients/store', [ClientController::class, 'store'])->name('clients.store');
