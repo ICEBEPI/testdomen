@@ -4,9 +4,9 @@
         @if ($errors->any())
             {{ implode('', $errors->all('<div>:message</div>')) }}
         @endif
-        <form action="{{ route('cars.store') }}" method="POST">
+        <form action="{{ route('cars.update', $car) }}" method="POST">
             @csrf
-            @method('POST')
+            @method('PUT')
             @include('cars.form')
 
             <div class="mt-6 flex items-center justify-start gap-x-6">

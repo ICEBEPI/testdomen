@@ -38,7 +38,6 @@ class CarController extends Controller
     public function create()
     {
         $clients = Client::all();
-        
         $engines = Engine::where('car_id', null)->get();
         return view('cars.create', compact(['engines', 'clients']));
 
@@ -59,7 +58,7 @@ class CarController extends Controller
             'brand' => $data['brand'],
             'seats' => $data['seats'],
             'year' => $data['year'],
-            'client_id' => $data['owner'], 
+            'client_id' => $data['owner'],
         ]);
         $engine->car_id = $car->id;
         $engine->save();
@@ -85,7 +84,9 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+        $clients = Client::all();
+        $engines = Engine::where('car_id', null)->get();
+        return view('cars.edit', compact(['car', 'engines', 'clients']));
     }
 
     /**
@@ -97,7 +98,22 @@ class CarController extends Controller
      */
     public function update(UpdateCarRequest $request, Car $car)
     {
-        //
+        $data = $request->validated();
+        $car->engine->update([
+            'car_id' => null,
+        ]);
+        $engine = Engine::find($data['engine']);
+        $engine->car_id = $car->id;
+        $engine->save();
+        $car->update([
+            'number' => $data['number'],
+            'brand' => $data['brand'],
+            'seats' => $data['seats'],
+            'year' => $data['year'],
+            'client_id' => $data['owner'],
+        ]);
+        return redirect()->route('cars.show', $car);
+
     }
 
     /**

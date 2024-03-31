@@ -21,7 +21,6 @@ use Random\Engine;
 
 Route::get('/', [MyController::class, 'main'])->name('main');
 
-Route::get('cars', [CarController::class, 'index'])->name('cars.index');
 Route::get('cars/interesting', [CarController::class, 'interesting'])->name('cars.interesting');
 Route::get('cars/oldest', [CarController::class, 'oldest'])->name('cars.oldest');
 Route::get('cars/powerful', [CarController::class, 'mostPowerfullHp'])->name('cars.powerful');
@@ -30,11 +29,8 @@ Route::get('cars/findNewestCar', [CarController::class, 'findNewestCar'])->name(
 Route::get('cars/findAverageAge', [CarController::class, 'findAverageAge'])->name('cars.AverageAge');
 Route::get('cars/findMostPopularModel', [CarController::class, 'findMostPopularModel'])->name('cars.MostPopularModel');
 Route::get('cars/findMostPopularSeats', [CarController::class, 'findMostPopularSeats'])->name('cars.MostPopularSeats');
-Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
-Route::post('cars/store', [CarController::class, 'store'])->name('cars.store');
 Route::get('engines/create', [EngineController::class, 'create'])->name('engines.create');
 Route::post('engines/store', [EngineController::class, 'store'])->name('engines.store');
-Route::get('cars/{car}', [CarController::class, 'show'])->name('cars.show');
-Route::get('cars/{car}/destroy', [CarController::class, 'destroy'])->name('cars.destroy');
 Route::get('clients/create', [ClientController::class, 'create'])->name('clients.create');
 Route::post('clients/store', [ClientController::class, 'store'])->name('clients.store');
+Route::resource('cars', CarController::class)->names('cars');
