@@ -24,6 +24,7 @@ class EngineFactory extends Factory
             'type' => $type,
             'hp' => random_int(90, 600)
         ];
+
     }
 
 

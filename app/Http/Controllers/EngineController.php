@@ -25,7 +25,8 @@ class EngineController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('engines.create');
     }
 
     /**
@@ -36,7 +37,13 @@ class EngineController extends Controller
      */
     public function store(StoreEngineRequest $request)
     {
-        //
+        $data = $request->validated();
+        $engine = Engine::create([
+            'volume' => $data['volume'],
+            'type' => $data['type'],
+            'hp' => $data['hp'],
+        ]);
+        return redirect()->route('cars.index');
     }
 
     /**
