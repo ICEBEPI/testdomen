@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Engine extends Model
 {
     use HasFactory;
+    protected $guarded = [];
 
     public function car(): BelongsTo
     {

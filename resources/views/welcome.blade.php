@@ -6,6 +6,7 @@
   @vite('resources/css/app.css')
 </head>
 <body>
-
+    @include('partials.menu')
+    @yield('content')
 </body>
 </html>
