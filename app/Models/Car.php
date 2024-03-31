@@ -14,4 +14,9 @@ class Car extends Model
     {
         return $this->hasOne(Engine::class);
     }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
 }

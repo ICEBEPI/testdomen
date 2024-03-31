@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
+use App\Models\Client;
 use App\Models\Engine;
 use Ramsey\Uuid\Type\Integer;
 
@@ -36,8 +37,10 @@ class CarController extends Controller
      */
     public function create()
     {
+        $clients = Client::all();
+        
         $engines = Engine::where('car_id', null)->get();
-        return view('cars.create', compact(['engines']));
+        return view('cars.create', compact(['engines', 'clients']));
 
     }
 
@@ -56,6 +59,7 @@ class CarController extends Controller
             'brand' => $data['brand'],
             'seats' => $data['seats'],
             'year' => $data['year'],
+            'client_id' => $data['owner'], 
         ]);
         $engine->car_id = $car->id;
         $engine->save();
