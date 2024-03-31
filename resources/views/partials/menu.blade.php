@@ -4,4 +4,5 @@
     <a class="block text-2xl font-semibold uppercase text-gray-800 hover:text-yellow-700" href="{{ route('cars.create') }}">Добавить авто</a>
     <a class="block text-2xl font-semibold uppercase text-gray-800 hover:text-yellow-700" href="{{ route('engines.create') }}">Добавить двигатели</a>
     <a class="block text-2xl font-semibold uppercase text-gray-800 hover:text-yellow-700" href="{{ route('cars.interesting') }}">Интересные факты</a>
+    <a class="block text-2xl font-semibold uppercase text-gray-800 hover:text-yellow-700" href="{{ route('clients.create') }}">Добавить клиента</a>
 </div>
