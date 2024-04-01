@@ -15,7 +15,9 @@ class EngineController extends Controller
      */
     public function index()
     {
-        //
+        $engines = Engine::with('car')->orderByDesc('id')->get();
+
+        return view('engines.index', compact(['engines']));
     }
 
     /**
@@ -54,7 +56,7 @@ class EngineController extends Controller
      */
     public function show(Engine $engine)
     {
-        //
+        return view('engines.show', compact(['engine']));
     }
 
     /**
@@ -65,7 +67,7 @@ class EngineController extends Controller
      */
     public function edit(Engine $engine)
     {
-        //
+        return view('engines.edit', compact(['engine']));
     }
 
     /**
@@ -77,7 +79,13 @@ class EngineController extends Controller
      */
     public function update(UpdateEngineRequest $request, Engine $engine)
     {
-        //
+        $data = $request->validated();
+        $engine->update([
+            'volume' => $data['volume'],
+            'type' => $data['type'],
+            'hp' => $data['hp'],
+        ]);
+        return redirect()->route('engines.index', $engine);
     }
 
     /**

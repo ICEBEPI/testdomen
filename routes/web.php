@@ -29,8 +29,7 @@ Route::get('cars/findNewestCar', [CarController::class, 'findNewestCar'])->name(
 Route::get('cars/findAverageAge', [CarController::class, 'findAverageAge'])->name('cars.AverageAge');
 Route::get('cars/findMostPopularModel', [CarController::class, 'findMostPopularModel'])->name('cars.MostPopularModel');
 Route::get('cars/findMostPopularSeats', [CarController::class, 'findMostPopularSeats'])->name('cars.MostPopularSeats');
-Route::get('engines/create', [EngineController::class, 'create'])->name('engines.create');
-Route::post('engines/store', [EngineController::class, 'store'])->name('engines.store');
 Route::get('clients/create', [ClientController::class, 'create'])->name('clients.create');
 Route::post('clients/store', [ClientController::class, 'store'])->name('clients.store');
 Route::resource('cars', CarController::class)->names('cars');
+Route::resource('engines', EngineController::class)->names('engines');

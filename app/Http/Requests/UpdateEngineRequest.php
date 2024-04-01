@@ -13,7 +13,7 @@ class UpdateEngineRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class UpdateEngineRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'volume' => 'required|numeric|max:10',
+            'type' => 'required|string|max:60',
+            'hp' => 'required|integer|max:2000',
         ];
     }
 }
