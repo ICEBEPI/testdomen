@@ -45,7 +45,7 @@ class EngineController extends Controller
             'type' => $data['type'],
             'hp' => $data['hp'],
         ]);
-        return redirect()->route('cars.index');
+        return redirect()->route('engines.index');
     }
 
     /**
