@@ -15,7 +15,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+
+        return view('clients.index', compact(['clients']));
     }
 
     /**
@@ -38,7 +40,7 @@ class ClientController extends Controller
     {
         $data = $request->validated();
         Client::create($data);
-        return redirect()->route('clients.create');
+        return redirect()->route('clients.index');
     }
 
     /**
@@ -49,7 +51,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        //
+        return view('clients.show', compact(['clients']));
     }
 
     /**
@@ -60,7 +62,7 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        //
+        return view('clients.edit', compact(['client']));
     }
 
     /**
@@ -72,7 +74,14 @@ class ClientController extends Controller
      */
     public function update(UpdateClientRequest $request, Client $client)
     {
-        //
+        $data = $request->validated();
+        $client->update([
+            'name' => $data['name'],
+            'birthday' => $data['birthday'],
+            'city' => $data['city'],
+            'phone' => $data['phone'],
+        ]);
+        return redirect()->route('clients.index', $client);
     }
 
     /**
