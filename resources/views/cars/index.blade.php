@@ -8,13 +8,19 @@
                         <h1>{{ $car->number }} </h1>
                     </a>
                     <div class="p-8 bg-slate-400 text-2xl">
+                        <div class="flex justify-end">
+                            <form action="{{ route('cars.destroy', $car) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="text-red-700 font-semibold px-6" type="submit">Удалить</button>
+                            </form>
+                        </div>
                         <ul>
                             <li>Модель: {{ $car->brand }}</li>
                             <li>Год выпуска: {{ $car->year }}</li>
                             <li>Количество сидений: {{ $car->seats }}</li>
-                            <li><a class="text-2xl font-semibold mb-6 text-red-800 underline"
-                                    href="{{ route('cars.destroy', $car) }}">Удалить авто из базы</a></li>
                         </ul>
+
                         <h3 class="mt-6 mb-3 text-3xl font-semibold">Параметры двигателя: </h3>
                         <ul>
                             <li>Объем: {{ $car->engine->volume }}</li>
