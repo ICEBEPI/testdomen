@@ -51,7 +51,7 @@ class ClientController extends Controller
      */
     public function show(Client $client)
     {
-        return view('clients.show', compact(['clients']));
+        return view('clients.show', compact(['client']));
     }
 
     /**
@@ -92,6 +92,12 @@ class ClientController extends Controller
      */
     public function destroy(Client $client)
     {
-        //
+        foreach($client->cars as $car)
+        {
+            $car->client_id = 0;
+        }
+        $client->delete();
+        
+        return redirect()->back();
     }
 }

@@ -5,6 +5,8 @@ use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EngineController;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\TypeEngineController;
+use App\Models\typeEngine;
 use Illuminate\Support\Facades\Route;
 use Random\Engine;
 
@@ -30,5 +32,9 @@ Route::get('cars/findAverageAge', [CarController::class, 'findAverageAge'])->nam
 Route::get('cars/findMostPopularModel', [CarController::class, 'findMostPopularModel'])->name('cars.MostPopularModel');
 Route::get('cars/findMostPopularSeats', [CarController::class, 'findMostPopularSeats'])->name('cars.MostPopularSeats');
 Route::resource('cars', CarController::class)->names('cars');
+
 Route::resource('engines', EngineController::class)->names('engines');
+
 Route::resource('clients', ClientController::class)->names('clients');
+
+Route::resource('type-engines', TypeEngineController::class)->names('type-engines');

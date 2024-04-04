@@ -15,4 +15,9 @@ class Engine extends Model
     {
         return $this->belongsTo(Car::class);
     }
+
+    public function type_engine(): BelongsTo
+    {
+        return $this->belongsTo(TypeEngine::class);
+    }
 }
