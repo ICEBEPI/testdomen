@@ -11,7 +11,7 @@
         <h2 class="text-2xl font-bold">{{ $engine->volume }}</h2>
 
         <h2 class="text-xl font-semibold mb-2 mt-4">Тип:</h2>
-        <h2 class="text-2xl font-bold">{{ $engine->type }}</h2>
+        <h2 class="text-2xl font-bold">{{ $engine->type_engine->name }}</h2>
 
         <h2 class="text-xl font-semibold mb-2 mt-4">Мощность:</h2>
         <h2 class="text-2xl font-bold">{{ $engine->hp }} л.с.</h2>

@@ -68,7 +68,8 @@ class EngineController extends Controller
      */
     public function edit(Engine $engine)
     {
-        return view('engines.edit', compact(['engine']));
+        $types = TypeEngine::all();
+        return view('engines.edit', compact(['engine', 'types']));
     }
 
     /**

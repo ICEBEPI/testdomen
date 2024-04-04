@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\TypeEngine;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,12 +17,9 @@ class EngineFactory extends Factory
      */
     public function definition()
     {
-        $types = ['benzine', 'diezel', 'electric'];
-        $typeKey = array_rand($types);
-        $type = $types[$typeKey];
         return [
             'volume' => random_int(10, 80) / 10,
-            'type' => $type,
+            'type_engine_id' => TypeEngine::all()->random()->id,
             'hp' => random_int(90, 600)
         ];
 
