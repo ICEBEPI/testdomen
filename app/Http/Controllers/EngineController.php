@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Engine;
 use App\Http\Requests\StoreEngineRequest;
 use App\Http\Requests\UpdateEngineRequest;
+use App\Models\TypeEngine;
 
 class EngineController extends Controller
 {
@@ -27,8 +28,8 @@ class EngineController extends Controller
      */
     public function create()
     {
-
-        return view('engines.create');
+        $types = TypeEngine::all();
+        return view('engines.create', compact('types'));
     }
 
     /**
