@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Models\City;
 use App\Models\Client;
 
 class ClientController extends Controller
@@ -27,7 +28,8 @@ class ClientController extends Controller
      */
     public function create()
     {
-        return view('clients.create');
+        $cities = City::all();
+        return view('clients.create', compact('cities'));
     }
 
     /**
@@ -62,7 +64,8 @@ class ClientController extends Controller
      */
     public function edit(Client $client)
     {
-        return view('clients.edit', compact(['client']));
+        $cities = City::all();
+        return view('clients.edit', compact(['client', 'cities']));
     }
 
     /**

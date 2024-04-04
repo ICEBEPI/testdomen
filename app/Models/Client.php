@@ -15,6 +15,11 @@ class Client extends Model
     {
         return $this->hasMany(Car::class);
     }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 }
 
 
