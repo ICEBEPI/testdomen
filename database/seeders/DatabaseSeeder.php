@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
      $this->call([
         CarSeeder::class,
+        TypeEngineSeeder::class,
         EngineSeeder::class,
         CitySeeder::class,
         ClientSeeder::class
