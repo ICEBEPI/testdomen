@@ -1,6 +1,7 @@
 @extends('master')
 @section('content')
     <div class="p-20">
+        @include('partials.alarm')
         <div class="grid grid-cols-3 gap-8">
             @foreach ($clients as $client)
                 <div class="bg-gray-100 rounded-lg shadow-lg p-4 mb-6">
@@ -15,14 +16,14 @@
                         <h2 class="text-2xl font-bold">{{ $client->birthday }}</h2>
 
                         <h2 class="text-xl font-semibold mb-2 mt-4">Город:</h2>
-                        <h2 class="text-2xl font-bold">{{ $client->city }}</h2>
+                        <h2 class="text-2xl font-bold">{{ $client->city->name }}</h2>
 
                         <h2 class="text-xl font-semibold mb-2 mt-4">Телефон:</h2>
                         <h2 class="text-2xl font-bold">{{ $client->phone }}</h2>
 
                         @if($client->cars->count())
-                            <h2>Список авто</h2>
-                            <ol>
+                            <h2 class="text-xl font-semibold mb-2 mt-4">Список авто</h2>
+                            <ol class="text-2xl font-bold">
                                 @foreach($client->cars as $car)
                                     <li>
                                         <a href="{{ route("cars.show", $car) }}">
@@ -32,6 +33,10 @@
                                 @endforeach
                             </ol>
                         @endif
+                        @if ($client->cars->count() == 0)
+                            <h2 class="text-xl font-semibold mb-2 mt-4">Нет авто</h2>
+                        @endif
+
                     </div>
                 </div>
             @endforeach

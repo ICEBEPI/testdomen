@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\City;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,18 +17,11 @@ class ClientFactory extends Factory
      */
     public function definition()
     {
-        $cities = [
-            'Алматы',
-            'Астана',
-            'Шымкент',
-            'Тараз',
-            'Караганда',
-            'Кокшетау',
-        ];
+        $cities = City::all();
         return [
             'name' => fake()->name(),
             'birthday' => fake()->date('Y-m-d', '2005-01-01'),
-            'city' => $cities[array_rand($cities)],
+            'city_id' => $cities->random()->id,
             'phone' => fake()->phoneNumber(),
         ];
     }
