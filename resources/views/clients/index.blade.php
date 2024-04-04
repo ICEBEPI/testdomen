@@ -5,8 +5,20 @@
         <div class="grid grid-cols-3 gap-8">
             @foreach ($clients as $client)
                 <div class="bg-gray-100 rounded-lg shadow-lg p-4 mb-6">
+            <div class="p-8 bg-slate-400 text-2xl">
                     <h2 class="text-2xl font-bold underline"><a href="{{ route('clients.edit', $client) }}">Редактировать</a>
+                
+            
+                <div class="flex justify-end">
+                    <h2>
+                        <form action="{{ route('clients.destroy', $client) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="text-red-700 font-semibold px-6" type="submit">Удалить</button>
+                        </form>
                     </h2>
+                </div>
+            </div>
 
                     <div class="bg-gray-100 rounded-lg shadow-lg p-4 mb-6">
                         <h2 class="text-xl font-semibold mb-2">Имя:</h2>
