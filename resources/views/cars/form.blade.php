@@ -76,11 +76,11 @@
                     @if (isset($car))
                         <option value="{{ $car->engine->id }}">{{ $car->engine->volume }} см3 -
                             {{ $car->engine->hp }}
-                            л.с. ({{ $car->engine->type }})</option>
+                            л.с. ({{ $car->engine->type_engine->name }})</option>
                     @endif
                     @foreach ($engines as $engine)
                         <option value="{{ $engine->id }}">{{ $engine->volume }} см3 - {{ $engine->hp }}
-                            л.с. ({{ $engine->type }})
+                            л.с. ({{ $engine->type_engine->name }})
                         </option>
                     @endforeach
                 </select>

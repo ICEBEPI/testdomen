@@ -36,7 +36,7 @@
             <h2 class="text-2xl font-bold">{{ $car->engine->volume }}</h2>
 
             <h2 class="text-xl font-semibold mb-2 mt-4">Тип:</h2>
-            <h2 class="text-2xl font-bold">{{ $car->engine->type }}</h2>
+            <h2 class="text-2xl font-bold">{{ $car->engine->type_engine->name }}</h2>
 
             <h2 class="text-xl font-semibold mb-2 mt-4">Мощность:</h2>
             <h2 class="text-2xl font-bold">{{ $car->engine->hp }} л.с.</h2>

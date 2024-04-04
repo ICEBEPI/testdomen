@@ -22,7 +22,7 @@
 
                     <div class="bg-gray-100 rounded-lg shadow-lg p-4 mb-6">
                         <h2 class="text-xl font-semibold mb-2">Имя:</h2>
-                        <h2 class="text-2xl font-bold">{{ $client->name }}</h2>
+                        <h2 class="text-2xl font-bold underline"><a href="{{ route('clients.show', $client) }}"> {{ $client->name }}</a></h2>
 
                         <h2 class="text-xl font-semibold mb-2 mt-4">Год рождения:</h2>
                         <h2 class="text-2xl font-bold">{{ $client->birthday }}</h2>

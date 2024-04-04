@@ -33,7 +33,7 @@
                             <h2 class="mt-6 mb-3 text-3xl font-semibold underline"><a href="{{ route('engines.show', $car->engine) }}">Параметры двигателя:</h2></a>
                             <ul>
                                 <li>Объем: {{ $car->engine->volume }}</li>
-                                <li>Тип : {{ $car->engine->type }}</li>
+                                <li>Тип : {{ $car->engine->type_engine->name }}</li>
                                 <li>Мощность: {{ $car->engine->hp }} л.с. </li>
                             </ul>
                         @else
