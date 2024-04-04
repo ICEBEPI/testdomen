@@ -1,9 +1,7 @@
 @extends('master')
 @section('content')
     <div class="p-20">
-        @if ($errors->any())
-            {{ implode('', $errors->all('<div>:message</div>')) }}
-        @endif
+        @include('partials.alarm')
         <form action="{{ route('engines.update', $engine) }}" method="POST">
             @csrf
             @method('PUT')

@@ -1,10 +1,8 @@
 @extends('master')
 @section('content')
     <div class="p-20">
-        @if ($errors->any())
-            {{ implode('', $errors->all('<div>:message</div>')) }}
-        @endif
         <form action="{{ route('cars.store') }}" method="POST">
+            @include('partials.alarm')
             @csrf
             @method('POST')
             @include('cars.form')

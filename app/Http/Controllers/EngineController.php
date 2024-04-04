@@ -96,7 +96,11 @@ class EngineController extends Controller
      */
     public function destroy(Engine $engine)
     {
-        //
+        if($engine->car){
+          return redirect()->back()->withErrors('Двигатель установлен на авто');
+        }
+        $engine->delete();
+        return redirect()->back();
     }
 
 }
