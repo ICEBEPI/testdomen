@@ -26,8 +26,8 @@ class StoreClientRequest extends FormRequest
         return [
             'name' => 'required|string|min:5|max:100',
             'birthday' => 'required|date',
-            'city' => 'required|string|min:2|max:100',
-            'phone' => 'required|between:9,12'
+            'city_id' => 'required|exists:cities,id',
+            'phone' => 'required|between:9,12|unique:clients,phone'
 
         ];
     }

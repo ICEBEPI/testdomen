@@ -15,7 +15,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::all();
+        $cities = City::with('clients')->orderByDesc('id')->get();
         return view('cities.index', compact('cities'));
     }
 
@@ -88,6 +88,9 @@ class CityController extends Controller
      */
     public function destroy(City $city)
     {
+        if ($city->clients) {
+            return redirect()->back()->with('Нельзя удалить город с клиентами');
+        }
         $city->delete();
         return redirect()->route('cities.index');
     }

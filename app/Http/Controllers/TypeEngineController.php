@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoretypeEngineRequest;
 use App\Http\Requests\UpdatetypeEngineRequest;
+use App\Models\Engine;
 use App\Models\typeEngine;
 
 class TypeEngineController extends Controller
@@ -15,7 +16,8 @@ class TypeEngineController extends Controller
      */
     public function index()
     {
-        //
+        $typeEngines = typeEngine::with('engines')->orderbyDesc('id')->get();
+        return view('typeEngines.index', compact(['typeEngines']));
     }
 
     /**
@@ -25,7 +27,8 @@ class TypeEngineController extends Controller
      */
     public function create()
     {
-        //
+        $typeEngines = typeEngine::all();
+        return view('typeEngines.create', compact(['typeEngines']));
     }
 
     /**
@@ -36,7 +39,9 @@ class TypeEngineController extends Controller
      */
     public function store(StoretypeEngineRequest $request)
     {
-        //
+        $data = $request->validated();
+        typeEngine::create($data);
+        return redirect()->route('typeEngines.index');
     }
 
     /**
@@ -47,7 +52,7 @@ class TypeEngineController extends Controller
      */
     public function show(typeEngine $typeEngine)
     {
-        //
+        return view('typeEngines.show', compact(['typeEngine']));
     }
 
     /**
@@ -58,7 +63,9 @@ class TypeEngineController extends Controller
      */
     public function edit(typeEngine $typeEngine)
     {
-        //
+        $engine = Engine::all();
+        $typeEngines = typeEngine::all();
+        return view('typeEngines.edit', compact(['typeEngine', 'typeEngines', 'engine']));
     }
 
     /**
@@ -70,7 +77,9 @@ class TypeEngineController extends Controller
      */
     public function update(UpdatetypeEngineRequest $request, typeEngine $typeEngine)
     {
-        //
+        $data = $request->validated();
+        $typeEngine->update($data);
+        return redirect()->route('typeEngines.index', $typeEngine);
     }
 
     /**
@@ -81,6 +90,10 @@ class TypeEngineController extends Controller
      */
     public function destroy(typeEngine $typeEngine)
     {
-        //
+        if ($typeEngine->engines->count()) {
+            return redirect()->back()->withErrors('Тип двигателя не может быть удален');
+        }
+        $typeEngine->delete();
+        return redirect()->route('typeEngines.index');
     }
 }
