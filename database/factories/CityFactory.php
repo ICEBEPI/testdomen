@@ -16,24 +16,8 @@ class CityFactory extends Factory
      */
     public function definition()
     {
-        $cities = [
-            'Алматы',
-            'Астана',
-            'Шымкент',
-            'Тараз',
-            'Караганда',
-            'Кокшетау',
-            'Костанай',
-            'Павлодар',
-            'Петропавл',
-            'Семей',
-        ];
-
-        $cityKey = array_rand($cities);
-        $city = $cities[$cityKey];
-
         return [
-            'name' => $city,
+            //
         ];
     }
 }
