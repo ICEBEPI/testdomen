@@ -25,7 +25,7 @@ class UpdateEngineRequest extends FormRequest
     {
         return [
             'volume' => 'required|numeric|max:10',
-            'type' => 'required|string|max:60',
+            'type' => 'required|exists:type_engines,id',
             'hp' => 'required|integer|max:2000',
         ];
     }

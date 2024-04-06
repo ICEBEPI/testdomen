@@ -3,13 +3,13 @@
     <div class="p-20">
         @include('partials.alarm')
         <div class="grid grid-cols-3 gap-8">
-            @foreach ($cities as $city)
+            @foreach ($typeEngines as $typeEngine)
                 <div class="bg-gray-100 rounded-lg shadow-lg p-4 mb-6">
                     <div class="flex justify-between items-center">
                         <h2 class="text-2xl font-bold underline">
-                            <a href="{{ route('cities.edit', $city) }}" class="text-blue-600 hover:text-blue-800">Редактировать</a>
+                            <a href="{{ route('typeEngines.edit', $typeEngine) }}" class="text-blue-600 hover:text-blue-800">Редактировать</a>
                         </h2>
-                        <form action="{{ route('cities.destroy', $city) }}" method="POST">
+                        <form action="{{ route('typeEngines.destroy', $typeEngine) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-700 font-semibold px-4 py-2 bg-red-100 hover:bg-red-200 rounded-lg flex items-center">
@@ -22,23 +22,24 @@
                     </div>
 
                     <div class="bg-gray-100 rounded-lg shadow-lg p-4 mb-6">
-                        <h2 class="text-xl font-semibold mb-2">Название города:</h2>
-                        <h2 class="text-2xl font-bold underline"><a href="{{ route('cities.show', $city) }}"> {{ $city->name }}</a></h2>
+                        <h2 class="text-xl font-semibold mb-2">Тип двигателя:</h2>
+                        <h2 class="text-2xl font-bold underline"><a href="{{ route('typeEngines.show', $typeEngine) }}"> {{ $typeEngine->name }}</a></h2>
 
-                        @if($city->clients->count())
-                            <h2 class="text-xl font-semibold mb-2 mt-4">Жители:</h2>
+                        @if($typeEngine->engines->count())
+                            <h2 class="text-xl font-semibold mb-2 mt-4">Двигатели:</h2>
                             <ol class="text-2xl font-bold">
-                                @foreach($city->clients as $client)
+                                @foreach($typeEngine->engines as $engine)
                                     <li>
-                                        <a href="{{ route("clients.show", $client) }}">
-                                            {{ $client->name }}
+                                        <a href="{{ route("engines.show", $engine) }}">
+                                            {{ $engine->volume }} см3 - {{ $engine->hp }}
+                            л.с. ({{ $engine->type_engine->name }})
                                         </a>
                                     </li>
                                 @endforeach
                             </ol>
                         @endif
-                        @if ($city->clients->count() == 0)
-                            <h2 class="text-xl font-semibold mb-2 mt-4">Нет жителей</h2>
+                        @if ($typeEngine->engines->count() == 0)
+                            <h2 class="text-xl font-semibold mb-2 mt-4">Нет двигетелей</h2>
                         @endif
 
                     </div>

@@ -62,7 +62,7 @@ class CarController extends Controller
         ]);
         $engine->car_id = $car->id;
         $engine->save();
-        return redirect()->route('cars.index');
+        return redirect()->route('cars.index')->withSuccess('Авто успешно добавлен');
     }
 
     /**

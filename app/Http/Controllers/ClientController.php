@@ -16,7 +16,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::all();
+        $clients = Client::with('city', 'cars')->orderByDesc('id')->get();
 
         return view('clients.index', compact(['clients']));
     }
@@ -41,7 +41,13 @@ class ClientController extends Controller
     public function store(StoreClientRequest $request)
     {
         $data = $request->validated();
-        Client::create($data);
+        $city = City::find($data['city']);
+        Client::create([
+            'name' => $data['name'],
+            'birthday' => $data['birthday'],
+            'city_id' => $city,
+            'phone' => $data['phone'],
+        ]);
         return redirect()->route('clients.index');
     }
 
@@ -100,7 +106,7 @@ class ClientController extends Controller
             $car->client_id = 0;
         }
         $client->delete();
-        
+
         return redirect()->back();
     }
 }

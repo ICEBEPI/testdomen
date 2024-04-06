@@ -19,9 +19,8 @@ return new class extends Migration
             $table->foreignIdFor(City::class);
             $table->string('name');
             $table->date('birthday');
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->timestamps();
-
         });
     }
 

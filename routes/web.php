@@ -40,4 +40,4 @@ Route::resource('cities', CityController::class)->names('cities');
 
 Route::resource('clients', ClientController::class)->names('clients');
 
-Route::resource('type-engines', TypeEngineController::class)->names('type-engines');
+Route::resource('type-engines', TypeEngineController::class)->names('typeEngines');

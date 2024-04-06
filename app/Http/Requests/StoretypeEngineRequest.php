@@ -13,7 +13,7 @@ class StoretypeEngineRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class StoretypeEngineRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|string|min:2|max:60|unique:type_engines,name',
         ];
     }
 }
