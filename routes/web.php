@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\Car;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EngineController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\TypeEngineController;
+use App\Models\City;
 use App\Models\typeEngine;
 use Illuminate\Support\Facades\Route;
 use Random\Engine;
@@ -34,6 +36,7 @@ Route::get('cars/findMostPopularSeats', [CarController::class, 'findMostPopularS
 Route::resource('cars', CarController::class)->names('cars');
 
 Route::resource('engines', EngineController::class)->names('engines');
+Route::resource('cities', CityController::class)->names('cities');
 
 Route::resource('clients', ClientController::class)->names('clients');
 

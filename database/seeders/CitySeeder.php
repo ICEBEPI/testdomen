@@ -16,6 +16,22 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        City::factory()->count(10)->create();
+        $cities = [
+            'Алматы',
+            'Астана',
+            'Шымкент',
+            'Тараз',
+            'Караганда',
+            'Кокшетау',
+            'Костанай',
+            'Павлодар',
+            'Петропавл',
+            'Семей',
+        ];
+        foreach ($cities as $city) {
+            City::factory()->create([
+                'name' => $city
+            ]);
+        }
     }
 }

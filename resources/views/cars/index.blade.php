@@ -22,13 +22,6 @@
                             <li>Количество сидений: {{ $car->seats }}</li>
                         </ul>
 
-                        {{-- <h3 class="mt-6 mb-3 text-3xl font-semibold">Параметры двигателя: </h3>
-                        <ul>
-                            <li>Объем: {{ $car->engine->volume }}</li>
-                            <li>Тип : {{ $car->engine->type }}</li>
-                            <li>Мощность: {{ $car->engine->hp }} л.с. </li>
-                        </ul> --}}
-
                         @if ($car->engine)
                             <h2 class="mt-6 mb-3 text-3xl font-semibold underline"><a href="{{ route('engines.show', $car->engine) }}">Параметры двигателя:</h2></a>
                             <ul>
