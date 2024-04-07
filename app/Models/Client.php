@@ -20,6 +20,12 @@ class Client extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }
 
 
