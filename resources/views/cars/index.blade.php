@@ -11,7 +11,7 @@
                     <div class="p-8 bg-slate-400 text-2xl">
 
                         <ul>
-                            <li>Модель: {{ $car->brand }}</li>
+                            <li>Модель: {{ $car->brand->name }}</li>
                             <li>Год выпуска: {{ $car->year }}</li>
                             <li>Количество сидений: {{ $car->seats }}</li>
                         </ul>

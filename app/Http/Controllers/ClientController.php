@@ -41,11 +41,14 @@ class ClientController extends Controller
     public function store(StoreClientRequest $request)
     {
         $data = $request->validated();
-        $city = City::find($data['city']);
+        $city = City::find($data['city_id']);
+        if(!$city) {
+            return redirect()->route('clients.index')->withErrors('Город не найден');
+        }
         Client::create([
             'name' => $data['name'],
             'birthday' => $data['birthday'],
-            'city_id' => $city,
+            'city_id' => $data['city_id'],
             'phone' => $data['phone'],
         ]);
         return redirect()->route('clients.index');
@@ -87,7 +90,7 @@ class ClientController extends Controller
         $client->update([
             'name' => $data['name'],
             'birthday' => $data['birthday'],
-            'city' => $data['city'],
+            'city_id' => $data['city_id'],
             'phone' => $data['phone'],
         ]);
         return redirect()->route('clients.index', $client);

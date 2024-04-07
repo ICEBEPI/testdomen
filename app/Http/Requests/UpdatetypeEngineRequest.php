@@ -24,7 +24,7 @@ class UpdatetypeEngineRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:2|max:60|unique:type_engines,name',
+            'name' => 'required|string|min:2|max:60|unique:type_engines,name,' . $this->route('typeEngine')->id,
         ];
     }
 }

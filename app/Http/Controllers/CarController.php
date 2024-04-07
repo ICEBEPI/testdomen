@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Car;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
+use App\Models\Brand;
 use App\Models\Client;
 use App\Models\Engine;
 use Ramsey\Uuid\Type\Integer;
@@ -37,9 +38,10 @@ class CarController extends Controller
      */
     public function create()
     {
+        $brands = Brand::all();
         $clients = Client::all();
         $engines = Engine::where('car_id', null)->get();
-        return view('cars.create', compact(['engines', 'clients']));
+        return view('cars.create', compact(['engines', 'clients', 'brands']));
 
     }
 
@@ -52,14 +54,18 @@ class CarController extends Controller
     public function store(StoreCarRequest $request)
     {
         $data = $request->validated();
-        $engine = Engine::find($data['engine']);
+        $brand = Brand::find($data['brand_id']);
+        if(!$brand) {
+            return redirect()->route('cars.index')->withErrors('Брэнд не найден');
+        }
         $car = Car::create([
             'number' => $data['number'],
-            'brand' => $data['brand'],
+            'brand_id' => $data['brand_id'],
             'seats' => $data['seats'],
             'year' => $data['year'],
             'client_id' => $data['owner'],
         ]);
+        $engine = Engine::find($data['engine']);
         $engine->car_id = $car->id;
         $engine->save();
         return redirect()->route('cars.index')->withSuccess('Авто успешно добавлен');
@@ -84,9 +90,10 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
+        $brands = Brand::all();
         $clients = Client::all();
         $engines = Engine::where('car_id', null)->get();
-        return view('cars.edit', compact(['car', 'engines', 'clients']));
+        return view('cars.edit', compact(['car', 'engines', 'clients', 'brands']));
     }
 
     /**
