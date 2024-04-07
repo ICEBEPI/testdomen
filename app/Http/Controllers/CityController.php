@@ -88,10 +88,10 @@ class CityController extends Controller
      */
     public function destroy(City $city)
     {
-        if ($city->clients) {
-            return redirect()->back()->with('Нельзя удалить город с клиентами');
+        if ($city->clients->count()) {
+            return redirect()->back()->withErrors('Нельзя удалить город с клиентами');
         }
         $city->delete();
-        return redirect()->route('cities.index');
+        return redirect()->route('cities.index')->withSuccess('Город успешно удален');
     }
 }

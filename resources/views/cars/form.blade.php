@@ -33,11 +33,14 @@
         <div class="sm:col-span-4">
             <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">Бренд</label>
             <div class="mt-2">
-                <div
-                    class="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-                    <input type="text" name="brand" id="brand"
-                        class="block flex-1 border-0 bg-transparent py-1.5 pl-3 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                        placeholder="Audi" value="@if (isset($car)) {{ $car->brand }} @endif">
+                <div>
+                    <select id="brand" name="brand_id"
+                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                    @foreach ($brands as $brand)
+                        <option @if (isset($car) && $car->brand == $brand) selected @endif value="{{ $brand->id }}">
+                            {{ $brand->name }}</option>
+                    @endforeach
+                </select>
                 </div>
             </div>
         </div>

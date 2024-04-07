@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Brand;
-use App\Models\Client;
-use App\Models\Engine;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cars', function (Blueprint $table) {
+        Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Client::class)->default(0);
-            $table->string('number')->unique();
-            $table->foreignIdFor(Brand::class)->default(0);
-            $table->integer('year');
-            $table->integer('seats')->default(4);
+            $table->string('name')->unique();
+            $table->unsignedBigInteger('price');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cars');
+        Schema::dropIfExists('services');
     }
 };

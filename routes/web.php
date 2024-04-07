@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\Car;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CityController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EngineController;
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\TypeEngineController;
+use App\Models\Brand;
 use App\Models\City;
 use App\Models\typeEngine;
 use Illuminate\Support\Facades\Route;
@@ -41,3 +43,4 @@ Route::resource('cities', CityController::class)->names('cities');
 Route::resource('clients', ClientController::class)->names('clients');
 
 Route::resource('type-engines', TypeEngineController::class)->names('typeEngines');
+Route::resource('brands', BrandController::class)->names('brands');
