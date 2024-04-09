@@ -190,7 +190,7 @@ class CarController extends Controller
         $modelCounts = [];
         $cars = Car::all();
         foreach ($cars as $car) {
-            $model = $car->brand;
+            $model = $car->brand->name;
             if (isset($modelCounts[$model])) {
                 $modelCounts[$model]++;
             } else {
@@ -252,18 +252,21 @@ class CarController extends Controller
     public function avgHpByType(): array
     {
         $result = [];
-        $cars = Car::with('engine')->get();
-        $engines = $cars->pluck('engine');
-        $types = $engines->pluck('type')->unique();
+        $cars = Car::with('engine.type_engine')->get();
+        $engines = $cars->pluck('engine')->whereNotNull();
+        $types = $engines->pluck('type_engine')->unique();
+
         foreach ($types as $type) {
-            $filteredEngines = $engines->filter(function (Engine $engine, int $key) use ($type) {
-                return $engine->type == $type;
+            $filteredEngines = $engines->filter(function ($engine) use ($type) {
+                return $engine->type_engine->id === $type->id;
             });
             $avgHp = $filteredEngines->avg('hp');
-            $result[$type] = $avgHp;
+            $result[$type->name] = $avgHp;
         }
+
         return $result;
     }
+
 
     public function bestEngineCar()
     {
