@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Http\Requests\StoreOrderRequest;
 use App\Http\Requests\UpdateOrderRequest;
+use App\Models\Car;
+use App\Models\Client;
+use App\Models\Service;
 
 class OrderController extends Controller
 {
@@ -15,7 +18,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::with('payments', 'services')->orderByDesc('created_at')->get();
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -25,7 +29,11 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        $cars = Car::all();
+        $clients = Client::all();
+        $services = Service::all();
+        $orders = Order::all();
+        return view('orders.create', compact('orders', 'services', 'clients', 'cars'));
     }
 
     /**
@@ -36,7 +44,16 @@ class OrderController extends Controller
      */
     public function store(StoreOrderRequest $request)
     {
-        //
+        $data = $request->validated();
+        $serviceIds = $data['service_id'];
+        $services = Service::findMany($serviceIds);
+        if ($services->count() != count($serviceIds)) {
+            return redirect()->route('orders.index')->withErrors('Одна или несколько услуг не найдены');
+        }
+        unset($data['service_id']);
+        $order = Order::create($data);
+        $order->services()->attach($serviceIds);
+        return redirect()->route('orders.index')->with('success', 'Заказ создан успешно');
     }
 
     /**
@@ -47,7 +64,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('orders.show', compact('order'));
     }
 
     /**
@@ -58,7 +75,11 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        $cars = Car::all();
+        $clients = Client::all();
+        $services = Service::all();
+        $orders = Order::all();
+        return view('orders.edit', compact('order', 'orders', 'services', 'clients', 'cars'));
     }
 
     /**
@@ -70,7 +91,16 @@ class OrderController extends Controller
      */
     public function update(UpdateOrderRequest $request, Order $order)
     {
-        //
+        $data = $request->validated();
+        $serviceIds = $data['service_id'];
+        $services = Service::findMany($serviceIds);
+        if ($services->count() != count($serviceIds)) {
+            return redirect()->route('orders.index')->withErrors('Одна или несколько услуг не найдены');
+        }
+        unset($data['service_id']);
+        $order->update($data);
+        $order->services()->attach($serviceIds);
+        return redirect()->route('orders.index')->with('success', 'Заказ успешно обновлен');
     }
 
     /**
@@ -81,6 +111,10 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        if($order->payments->count() > 0){
+            return redirect()->back()->withErrors('Заказ не может быть удален');
+        }
+        $order->delete();
+        return redirect()->route('orders.index')->withSuccess('Заказ успешно удален');
     }
 }

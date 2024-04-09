@@ -7,10 +7,9 @@ use App\Http\Controllers\CityController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EngineController;
 use App\Http\Controllers\MyController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TypeEngineController;
-use App\Models\Brand;
-use App\Models\City;
-use App\Models\typeEngine;
 use Illuminate\Support\Facades\Route;
 use Random\Engine;
 
@@ -44,3 +43,5 @@ Route::resource('clients', ClientController::class)->names('clients');
 
 Route::resource('type-engines', TypeEngineController::class)->names('typeEngines');
 Route::resource('brands', BrandController::class)->names('brands');
+Route::resource('orders', OrderController::class)->names('orders');
+Route::resource('payments', PaymentController::class)->names('payments');

@@ -2,6 +2,7 @@
 
 use App\Models\Car;
 use App\Models\Client;
+use App\Models\Service;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Payment;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Requests\UpdatePaymentRequest;
+use App\Models\Order;
 
 class PaymentController extends Controller
 {
@@ -15,7 +16,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payments = Payment::with('order')->orderByDesc('created_at')->get();
+        return view('payments.index', compact('payments'));
     }
 
     /**
@@ -25,7 +27,9 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        $orders = Order::all();
+        $payments = Payment::all();
+        return view('payments.create', compact('payments', 'orders'));
     }
 
     /**
@@ -36,7 +40,9 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
-        //
+        $data = $request->validated();
+        Payment::create($data);
+        return redirect()->route('payments.index');
     }
 
     /**
@@ -47,7 +53,7 @@ class PaymentController extends Controller
      */
     public function show(Payment $payment)
     {
-        //
+        return view('payments.show', compact('payment'));
     }
 
     /**
@@ -58,7 +64,9 @@ class PaymentController extends Controller
      */
     public function edit(Payment $payment)
     {
-        //
+        $orders = Order::all();
+        $payments = Payment::all();
+        return view('payments.edit', compact('payment', 'payments', 'orders'));
     }
 
     /**
@@ -70,7 +78,9 @@ class PaymentController extends Controller
      */
     public function update(UpdatePaymentRequest $request, Payment $payment)
     {
-        //
+        $data = $request->validated();
+        $payment->update($data);
+        return redirect()->route('payments.index');
     }
 
     /**
@@ -81,6 +91,7 @@ class PaymentController extends Controller
      */
     public function destroy(Payment $payment)
     {
-        //
+        $payment->delete();
+        return redirect()->route('payments.index')->withSuccess('Платеж успешно удален');
     }
 }

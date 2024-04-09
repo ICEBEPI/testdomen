@@ -22,7 +22,7 @@
         <h2 class="text-2xl font-bold">{{ $car->year }}</h2>
 
         <h2 class="text-xl font-semibold mb-2 mt-4">Бренд:</h2>
-        <h2 class="text-2xl font-bold">{{ $car->brand }}</h2>
+        <h2 class="text-2xl font-bold">{{ $car->brand->name }}</h2>
 
         <h2 class="text-xl font-semibold mb-2 mt-4">Количество мест:</h2>
         <h2 class="text-2xl font-bold">{{ $car->seats }}</h2>
