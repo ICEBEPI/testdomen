@@ -28,7 +28,7 @@
                     <option value="0">Не выбрано</option>
                     @foreach ($orders as $order)
                         <option value="{{ $order->id }}" @if (isset($payment) && $payment->order_id == $order->id) selected @endif>
-                            {{ $order->id }}
+                            {{ $order->id }} ({{ $order->client->name }}, {{ $order->car->brand->name }})
                         </option>
                     @endforeach
                 </select>
