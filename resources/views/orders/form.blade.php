@@ -41,7 +41,7 @@
             <div class="mt-2">
                 @foreach ($services as $service)
                     <label class="flex items-center">
-                        <input type="checkbox" name="service_id[]"
+                        <input type="checkbox" name="service_ids[]"
                             class="service-checkbox rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                             value="{{ $service->id }}" data-price="{{ $service->price }}"
                             @if (isset($order) && $order->services->contains($service->id)) checked @endif>

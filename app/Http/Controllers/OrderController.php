@@ -45,13 +45,18 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request)
     {
         $data = $request->validated();
-        $serviceIds = $data['service_id'];
+        $serviceIds = $data['service_ids'];
         $services = Service::findMany($serviceIds);
         if ($services->count() != count($serviceIds)) {
             return redirect()->route('orders.index')->withErrors('Одна или несколько услуг не найдены');
         }
-        unset($data['service_id']);
-        $order = Order::create($data);
+        $sum = $services->sum('price');
+        $order = Order::create([
+            'client_id' => $data['client_id'],
+            'car_id' => $data['car_id'],
+            'is_closed' => 0,
+            'sum' => $sum,
+        ]);
         $order->services()->attach($serviceIds);
         return redirect()->route('orders.index')->with('success', 'Заказ создан успешно');
     }
@@ -78,8 +83,7 @@ class OrderController extends Controller
         $cars = Car::all();
         $clients = Client::all();
         $services = Service::all();
-        $orders = Order::all();
-        return view('orders.edit', compact('order', 'orders', 'services', 'clients', 'cars'));
+        return view('orders.edit', compact('order', 'services', 'clients', 'cars'));
     }
 
     /**
@@ -92,13 +96,19 @@ class OrderController extends Controller
     public function update(UpdateOrderRequest $request, Order $order)
     {
         $data = $request->validated();
-        $serviceIds = $data['service_id'];
+        $serviceIds = $data['service_ids'];
         $services = Service::findMany($serviceIds);
         if ($services->count() != count($serviceIds)) {
             return redirect()->route('orders.index')->withErrors('Одна или несколько услуг не найдены');
         }
-        unset($data['service_id']);
-        $order->update($data);
+        $sum = $services->sum('price');
+        $order->update([
+            'client_id' => $data['client_id'],
+            'car_id' => $data['car_id'],
+            'is_closed' => 0,
+            'sum' => $sum,
+        ]);
+        $order->services()->detach();
         $order->services()->attach($serviceIds);
         return redirect()->route('orders.index')->with('success', 'Заказ успешно обновлен');
     }
